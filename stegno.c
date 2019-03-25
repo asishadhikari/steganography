@@ -1,23 +1,29 @@
 #include <stdio.h>
 #include <errno.h>
+#include <string.h>
+
 #include "helper.h"
 
 
 int main(int argc, char** argv){
     int valid = 0;
-    if (argc!=5 && argc != 4){
-        error("Usage:\n ./stegno -e original.img cipher.jpg secret.txt \n\
- ./stegno -d cipher.jpg secret.txt ");
+    char *img;
+    //command run in valid format
+    if (argc != 3){
     	errno = EINVAL;
+	error("Usage:\n\t./stegno [-e |-d ] image.jpg\n");
     }
-    switch(argc){
-        case 5:	
-            break;
-        case 4:
-            break;
-        default:
-            break;		
-    }	
 
+    if( !strcmp(argv[1],"-e") ){
+    	img = argv[2];
+	encode(img);
+    }else if( !(strcmp(argv[1], "-d")) ){
+    	img = argv[2];
+	decode(img);
+    }else{
+	errno = EINVAL;
+	error("Usage:\n\t./stegno [-e |-d ] image.jpg\n");
+    }
+    
     return 0;
 }

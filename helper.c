@@ -7,3 +7,12 @@ void error(char *error){
         perror(error);
 	exit(errno);
 }
+
+void encode(char *img){
+	
+}
+
+void decode(char *img){
+
+
+}
