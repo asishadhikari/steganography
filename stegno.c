@@ -2,27 +2,76 @@
 #include <errno.h>
 #include <string.h>
 
+
+/*
+    Ashish Adhikari
+    MIT License.
+    Howard University
+*/
+
 #include "helper.h"
 
 
 int main(int argc, char** argv){
     int valid = 0;
-    char *img;
+    char *img, *secret, *cipher;
+    img = secret = cipher = NULL;
+
+    char *usage_error = "Usage:\n\t./stegno -E -i image.bmp -m message.txt -c cipher.bmp\n\
+    \t./stegno -D -i cipher.bmp -m secret.txt\n"; 
     //command run in valid format
-    if (argc != 3){
+    if (argc != 8 && argc != 6){
     	errno = EINVAL;
-	error("Usage:\n\t./stegno [-e |-d ] image.jpg\n");
+	error(usage_error);
     }
 
-    if( !strcmp(argv[1],"-e") ){
-    	img = argv[2];
-	encode(img);
+    if( !strcmp(argv[1],"-E") ){
+	   if(argc!=8){
+            errno = EINVAL;
+            error(usage_error);
+       }
+       
+       //Order of Argument does not matter
+       for(int i = 2; i< argc; i++){
+        if( !(strcmp(argv[i],"-i")) )
+            img = argv[i+1];
+     
+        if( !(strcmp(argv[i],"-m")) )
+            secret = argv[i+1];
+
+        if( !(strcmp(argv[i],"-c")) )
+            cipher = argv[i+1];
+       }
+
+       //make sure proper invocation by user
+       if(!(img) || !(secret) || !(cipher)){
+        errno = EINVAL;
+        error(usage_error);
+       }
+       encode(img);
     }else if( !(strcmp(argv[1], "-d")) ){
-    	img = argv[2];
-	decode(img);
+    	if(argc!=6){
+            errno = EINVAL;
+            error(usage_error);
+        }
+       //Order of Argument does not matter
+       for(int i = 2; i< argc; i++){
+        if( !(strcmp(argv[i],"-i")) )
+            img = argv[i+1];
+     
+        if( !(strcmp(argv[i],"-m")) )
+            secret = argv[i+1];
+       }
+
+       //make sure proper invocation by user
+       if(!(img) || !(secret)){
+        errno = EINVAL;
+        error(usage_error);
+       }
+       decode(img);
     }else{
 	errno = EINVAL;
-	error("Usage:\n\t./stegno [-e |-d ] image.jpg\n");
+	error(usage_error);
     }
     
     return 0;
