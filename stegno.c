@@ -1,16 +1,14 @@
-#include <stdio.h>
-#include <errno.h>
-#include <string.h>
-
-
 /*
     Ashish Adhikari
     MIT License.
     Howard University
 */
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+
 
 #include "helper.h"
-
 
 int main(int argc, char** argv){
     int valid = 0;
@@ -48,7 +46,7 @@ int main(int argc, char** argv){
         errno = EINVAL;
         error(usage_error);
        }
-       encode(img);
+       encode(img,secret,cipher);
     }else if( !(strcmp(argv[1], "-d")) ){
     	if(argc!=6){
             errno = EINVAL;

@@ -1,4 +1,4 @@
 build:
 	gcc stegno.c helper.c -o stegno
 clean:
-	rm stegno
+	rm stegno *.txt cipher*
