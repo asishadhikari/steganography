@@ -72,6 +72,12 @@ void encode(char *img, char *secret){
 		fputc(c,fout);
 	}
 
+	//file pointers moved to last header byte
+
+
+
+
+
 	
 
 
