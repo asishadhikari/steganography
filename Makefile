@@ -1,5 +1,5 @@
 build:
-	gcc stegno.c helper_decode.c helper_encode.c -o stegno
+	gcc stegano.c helper_decode.c helper_encode.c -o stegano
 
 clean:
-	rm stegno *.txt cipher*
+	rm stegano *.txt cipher*

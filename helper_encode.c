@@ -10,8 +10,9 @@ void error(char *error){
 }
 
 
+//return variable length bit shifts and corresponding lsf
 int get_bit(char byte, int bit){
-	return ((byte >> 8 - bit) & 1);
+	return (byte >> (8 - bit) & 1);
 }
 
 
