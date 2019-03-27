@@ -19,35 +19,6 @@ void size_decryption(FILE *pf1, int *size_txt){
 	*size_txt = file_buff;
 }
 
-/* decryption of strings*/
-void string_decryption(FILE *pf1,char *strng,int size)
-{
-	int file_buff=0, i, j=0, k=0;
-	int ch, bit_msg;
-	for (i = 0; i < (size * 8); i++)
-	{
-		j++;
-		ch = fgetc(pf1);
-		bit_msg = (ch & 1);
-		if (bit_msg)
-		{
-			file_buff = (file_buff << 1) | 1;
-		}
-		else
-		{
-			file_buff = file_buff << 1;
-		}
-
-		if ( j == 8)
-		{
-			strng[k] =(char)file_buff; 
-			j=0;
-			k++;
-			file_buff = 0;
-		}
-	}
-	strng[k] = '\0';
-}
 /* decryption of secret message*/
 void secret_decryption(int size_txt, FILE *pf1, FILE *pf2){
 	int file_buff=0, i, j = 0, k = 0;
