@@ -84,7 +84,7 @@ int main(int argc, char** argv){
         errno = EINVAL;
         error(usage_error);
        }
-       decode(img);
+       decode(img,secret);
     }else{
 	errno = EINVAL;
 	error(usage_error);
